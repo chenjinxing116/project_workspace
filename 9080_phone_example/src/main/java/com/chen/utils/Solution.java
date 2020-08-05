@@ -23,8 +23,7 @@ public class Solution {
 
     public void backtrack(String combination, String next_digits) {
         // if there is no more digits to check
-        //加入0和1的判断
-        if (next_digits.length() == 0||next_digits.equals("0")||next_digits.equals("1")) {
+        if (next_digits.length() == 0 || next_digits.equals("0") || next_digits.equals("1")) {
             // the combination is done
             output.add(combination);
         }
@@ -34,8 +33,9 @@ public class Solution {
             // the next available digit
             String digit = next_digits.substring(0, 1);
             String letters = phone.get(digit);
-            //对应1和0开头的处理
-            if("".equals(letters)){backtrack(combination, next_digits.substring(1));}
+            if ("".equals(letters)) {
+                backtrack(combination, next_digits.substring(1));
+            }
             for (int i = 0; i < letters.length(); i++) {
                 String letter = phone.get(digit).substring(i, i + 1);
                 // append the current letter to the combination

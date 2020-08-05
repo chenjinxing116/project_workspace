@@ -22,19 +22,19 @@ public class ExampleServiceImp extends ExampleService {
             }
             //0~99的数字
             int a = 0;
-            try{
+            try {
                 a = Integer.parseInt(input.toString());
-                if(input.length()>2){
+                if (input.length() > 2) {
                     throw new Exception();
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 results.setCode(-1);
                 results.setData(input.toString());
                 results.setMsg("支持从0到99的数字！请输入正确内容");
                 return results;
             }
-            if (a > 99 || a < 0 ) {
-                results.setCode(-2  );
+            if (a > 99 || a < 0) {
+                results.setCode(-2);
                 results.setData(input.toString());
                 results.setMsg("超出0~99范围！");
                 return results;
