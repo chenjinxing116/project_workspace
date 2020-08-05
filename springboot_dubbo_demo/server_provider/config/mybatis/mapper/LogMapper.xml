@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.goldmsg.logTool.mapper.LogMapper">
+    <select id="getInfos" parameterType="java.util.Map" resultType="TbLogInfo">
+        SELECT
+        user_name,
+        user_code
+        FROM
+        audio_tb_gmvcs_base_log_record t1
+    </select>
+
+</mapper>

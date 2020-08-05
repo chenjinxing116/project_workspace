@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+    <!-- 配置可参考 http://dubbo.io/User+Guide-zh.htm -->
+    <!-- 服务提供方应用名，用于计算依赖关系 -->
+    <dubbo:application name="cas-dubbo-provider">
+        <dubbo:parameter key="qos.enable" value="true" />
+        <dubbo:parameter key="qos.accept.foreign.ip" value="false" />
+        <dubbo:parameter key="qos.port" value="33333" />
+    </dubbo:application>
+
+    <!-- 定义 zookeeper 注册中心地址及协议 -->
+    <dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" client="zkclient" />
+
+    <!-- 定义 Dubbo 协议名称及使用的端口，dubbo 协议缺省端口为 20880，如果配置为 -1 或者没有配置 port，则会分配一个没有被占用的端口 -->
+    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" />
+
+    <!-- 声明需要暴露的服务接口 -->
+    <!-- 配置授权服务rpc接口的更新授权接口的并发调用次数为1 -->
+    <dubbo:service interface="com.goldmsg.logTool.service.LogService"
+                   ref="logServiceImp" executes="100">
+        <dubbo:method name="testDubboMethod"/>
+    </dubbo:service>
+
+    <!-- 和本地 bean 一样实现服务 -->
+    <bean id="logServiceImp" class="com.goldmsg.logTool.service.impl.LogServiceImpl" />
+
+</beans>
