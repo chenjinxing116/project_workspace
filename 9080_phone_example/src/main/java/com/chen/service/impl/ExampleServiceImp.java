@@ -24,6 +24,9 @@ public class ExampleServiceImp extends ExampleService {
             int a = 0;
             try{
                 a = Integer.parseInt(input.toString());
+                if(input.length()>2){
+                    throw new Exception();
+                }
             }catch (Exception e){
                 results.setCode(-1);
                 results.setData(input.toString());
